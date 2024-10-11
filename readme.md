@@ -1,13 +1,13 @@
 # GroveDriverPack
 
-## ŠT—v
+## æ¦‚è¦
 
-Groveƒ‚ƒWƒ…[ƒ‹‚ğGrove‘Î‰ƒ{[ƒh‚Å‚·‚Î‚â‚­—˜—p‚·‚é‚½‚ß‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚Å‚·B  
-Groveƒ‚ƒWƒ…[ƒ‹‚ÌƒNƒ‰ƒX‚ÆAGrove‘Î‰ƒ{[ƒh‚ÌƒNƒ‰ƒX‚ª—pˆÓ‚³‚ê‚Ä‚¨‚èA‚±‚Ì2‚Â‚ÌƒNƒ‰ƒX‚ğ‘g‚İ‡‚í‚¹‚é‚¾‚¯‚ÅGroveƒ‚ƒWƒ…[ƒ‹‚©‚ç’l‚Ìæ“¾Aİ’è‚ª‚Å‚«‚Ü‚·B  
+Groveãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’Groveå¯¾å¿œãƒœãƒ¼ãƒ‰ã§ã™ã°ã‚„ãåˆ©ç”¨ã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚  
+Groveãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®ã‚¯ãƒ©ã‚¹ã¨ã€Groveå¯¾å¿œãƒœãƒ¼ãƒ‰ã®ã‚¯ãƒ©ã‚¹ãŒç”¨æ„ã•ã‚Œã¦ãŠã‚Šã€ã“ã®2ã¤ã®ã‚¯ãƒ©ã‚¹ã‚’çµ„ã¿åˆã‚ã›ã‚‹ã ã‘ã§Groveãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰å€¤ã®å–å¾—ã€è¨­å®šãŒã§ãã¾ã™ã€‚  
 
-## ‘Î‰»•i
+## å¯¾å¿œè£½å“
 
-### Grove‘Î‰ƒ{[ƒh
+### Groveå¯¾å¿œãƒœãƒ¼ãƒ‰
 
 * [Wio LTE Cat.1 JP Version](https://seeedjp.github.io/Wiki/Wio_LTE_for_Arduino/Home-ja.html)  
   * Arduino - SeeedJP STM32 Boards by Seeed K.K. + Wio LTE for Arduino by Seeed K.K.
@@ -15,42 +15,42 @@ Groveƒ‚ƒWƒ…[ƒ‹‚ÌƒNƒ‰ƒX‚ÆAGrove‘Î‰ƒ{[ƒh‚ÌƒNƒ‰ƒX‚ª—pˆÓ‚³‚ê‚Ä‚¨‚èA‚±‚Ì2‚Â‚ÌƒNƒ
   * Arduino - SeeedJP STM32 Boards by Seeed K.K. + Wio cell lib for Arduino by Seeed K.K.
 * [Wio LTE M1/NB1(BG96)](https://soracom.jp/products/module/wio_lte_m1_nb1/)
   * Arduino - SeeedJP STM32 Boards by Seeed K.K. + Wio cell lib for Arduino by Seeed K.K.
-  * (Mbed - [Seeed Wio LTE M1/NB1(BG96)](https://os.mbed.com/platforms/Seeed-Wio-BG96/)) © ŠJ”­—\’è
+  * (Mbed - [Seeed Wio LTE M1/NB1(BG96)](https://os.mbed.com/platforms/Seeed-Wio-BG96/)) â† é–‹ç™ºäºˆå®š
 * [ReButton](https://aka.ms/rebutton)
   * Arduino - SeeedJP ReButton by Seeed K.K.
 * [Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
   * Arduino - Seeed SAMD Boards by Seeed Studio
 
-### Groveƒ‚ƒWƒ…[ƒ‹
+### Groveãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 
 |Pic|Class|SKU|Name|Note|
 |:--|:--|:--|:--|:--|
-|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar884360_3.jpg" width="100">|GroveGasO2|101020002|[Grove - Oxygen Sensor(ME2-O2-„U20)](http://wiki.seeedstudio.com/Grove-Gas_Sensor-O2/)|ì¬’†|
+|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar884360_3.jpg" width="100">|GroveGasO2|101020002|[Grove - Oxygen Sensor(ME2-O2-Ğ¤20)](http://wiki.seeedstudio.com/Grove-Gas_Sensor-O2/)|ä½œæˆä¸­|
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar878321_4.jpg" width="100">|GroveButton|101020003|[Grove - Button](http://wiki.seeedstudio.com/Grove-Button/)||
-|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881115_4.jpg" width="100">|GroveUltrasonicRanger|101020010|[Grove - Ultrasonic Ranger](http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)|Mbed–¢‘Î‰|
-|<img src="https://statics3.seeedstudio.com/seeed/img/2017-02/0Es2ATc90JsEW4xNSNyBpVak.jpg" width="100">|GroveTempHumiDHT11|101020011|[Grove - Temperature & Humidity Sensor (DHT11)](http://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)|Mbed–¢‘Î‰|
+|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881115_4.jpg" width="100">|GroveUltrasonicRanger|101020010|[Grove - Ultrasonic Ranger](http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)|Mbedæœªå¯¾å¿œ|
+|<img src="https://statics3.seeedstudio.com/seeed/img/2017-02/0Es2ATc90JsEW4xNSNyBpVak.jpg" width="100">|GroveTempHumiDHT11|101020011|[Grove - Temperature & Humidity Sensor (DHT11)](http://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)|Mbedæœªå¯¾å¿œ|
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881159_2.jpg" width="100">|GroveRotaryAngle|101020017|[Grove - Rotary Angle Sensor](http://wiki.seeedstudio.com/Grove-Rotary_Angle_Sensor/)||
-|<img src="https://files.seeedstudio.com/wiki/Grove-Temperature_and_Humidity_Sensor_Pro/img/main.jpg" width="100">|GroveTempHumiDHT22|101020019|[Grove - Temperature & Humidity Sensor Pro (AM2302/DHT22)](http://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/)|Mbed–¢‘Î‰|
+|<img src="https://files.seeedstudio.com/wiki/Grove-Temperature_and_Humidity_Sensor_Pro/img/main.jpg" width="100">|GroveTempHumiDHT22|101020019|[Grove - Temperature & Humidity Sensor Pro (AM2302/DHT22)](http://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/)|Mbedæœªå¯¾å¿œ|
 |<img src="https://raw.githubusercontent.com/SeeedDocument/Grove-Tilt_Switch/master/img/Tilt1.jpg" width="100">|GroveTiltSwitch|101020025|[Grove - Tilt Switch](http://wiki.seeedstudio.com/Grove-Tilt_Switch/)||
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881092_3.jpg" width="100">|GroveDigitalLight|101020030|[Grove - Digital Light Sensor](http://wiki.seeedstudio.com/Grove-Digital_Light_Sensor/)||
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881144_3.jpg" width="100">|GroveTouch|101020037|[Grove - Touch Sensor](http://wiki.seeedstudio.com/Grove-Touch_Sensor/)||
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-01/bazaar676592_img_5740aa.jpg" width="100">|GroveMagneticSwitch|101020038|[Grove - Magnetic Switch](http://wiki.seeedstudio.com/Grove-Magnetic_Switch/)||
-|<img src="https://statics3.seeedstudio.com/seeed/img/2016-11/GsPzr5xrvqzue5sH4ZomS1DE.jpg" width="100">|GroveAccelerometer16G|101020054|[Grove - 3-Axis Digital Accelerometer(}16g)](http://wiki.seeedstudio.com/Grove-3-Axis_Digital_Accelerometer-16g/)||
+|<img src="https://statics3.seeedstudio.com/seeed/img/2016-11/GsPzr5xrvqzue5sH4ZomS1DE.jpg" width="100">|GroveAccelerometer16G|101020054|[Grove - 3-Axis Digital Accelerometer(Â±16g)](http://wiki.seeedstudio.com/Grove-3-Axis_Digital_Accelerometer-16g/)||
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-08/bazaar887099_4.jpg" width="100">|GroveEMGDetector|101020058|[Grove - EMG Detector](http://wiki.seeedstudio.com/Grove-EMG_Detector/)||
-|<img src="https://statics3.seeedstudio.com/product/101020078%201_02.jpg" width="100">|~~GroveAirQuality~~|101020078|[Grove - Air quality sensor v1.3](http://wiki.seeedstudio.com/Grove-Air_Quality_Sensor_v1.3/)|•K—v“d—¬‚ª‘½‚·‚¬‚ÄWio LTE/3G‚Å‚Íg‚¦‚È‚¢|
-|<img src="https://statics3.seeedstudio.com/images/product/101020091%203.jpg" width="100">|GroveMiniTrackBall|101020091|[Grove - Mini Track Ball](http://wiki.seeedstudio.com/Grove-Mini_Track_Ball/)|ì¬’†|
+|<img src="https://statics3.seeedstudio.com/product/101020078%201_02.jpg" width="100">|~~GroveAirQuality~~|101020078|[Grove - Air quality sensor v1.3](http://wiki.seeedstudio.com/Grove-Air_Quality_Sensor_v1.3/)|å¿…è¦é›»æµãŒå¤šã™ãã¦Wio LTE/3Gã§ã¯ä½¿ãˆãªã„|
+|<img src="https://statics3.seeedstudio.com/images/product/101020091%203.jpg" width="100">|GroveMiniTrackBall|101020091|[Grove - Mini Track Ball](http://wiki.seeedstudio.com/Grove-Mini_Track_Ball/)|ä½œæˆä¸­|
 |<img src="https://raw.githubusercontent.com/SeeedDocument/Grove_Light_Sensor/master/images/cover.jpg" width="100">|GroveLight|101020132|[Grove - Light Sensor v1.2](http://wiki.seeedstudio.com/Grove-Light_Sensor/)||
 |<img src="https://statics3.seeedstudio.com/seeed/img/2016-06/R425Ianm2Rr93qmJQFUEwGx7.jpg" width="100">|GroveTempHumiBaroBME280|101020193|[Grove - Temp&Humi&Barometer Sensor (BME280)](http://wiki.seeedstudio.com/Grove-Barometer_Sensor-BME280/)||
 |<img src="https://statics3.seeedstudio.com/seeed/img/2016-06/cmJT8HtXruW9KsyjBBeqDNT9.jpg" width="100">|GroveTempHumiSHT31|101020212|[Grove - Temperature&Humidity Sensor (SHT31)](http://wiki.seeedstudio.com/Grove-TempAndHumi_Sensor-SHT31/)||
 |<img src="https://statics3.seeedstudio.com/seeed/img/2016-09/mgPnvDQ0Qn1UbtrHuivjpyrb.jpg" width="100">|GroveSpeechRecognizer|101020232|[Grove - Speech Recognizer](http://wiki.seeedstudio.com/Grove-Speech_Recognizer/)||
-|<img src="https://statics3.seeedstudio.com/seeed/file/2017-06/bazaar482888_1.jpg" width="100">|GroveI2CColorSensor2|101020341|[Grove - I2C Color Sensor V2](https://www.seeedstudio.com/Grove-I2C-Color-Sensor-V2-p-2890.html)|ì¬’†|
+|<img src="https://statics3.seeedstudio.com/seeed/file/2017-06/bazaar482888_1.jpg" width="100">|GroveI2CColorSensor2|101020341|[Grove - I2C Color Sensor V2](https://www.seeedstudio.com/Grove-I2C-Color-Sensor-V2-p-2890.html)|ä½œæˆä¸­|
 |<img src="https://files.seeedstudio.com/wiki/Grove-I2C_High_Accuracy_Temp-Humi_Sensor-SHT35/img/main.jpg" width="100">|GroveTempHumiSHT35|101020592|[Grove - I2C High Accuracy Temp&Humi Sensor (SHT35)](http://wiki.seeedstudio.com/Grove-I2C_High_Accuracy_Temp%26Humi_Sensor-SHT35/)||
 |<img src="https://statics3.seeedstudio.com/images/product/onewiretempsensor.jpg" width="100">|GroveTempOneWire|101990019|One Wire Temperature Sensor||
 |<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881127_3.jpg" width="100">|GroveRelay|103020005|[Grove - Relay](http://wiki.seeedstudio.com/Grove-Relay/)||
 |<img src="https://statics3.seeedstudio.com/images/product/104020006%201.jpg" width="100">|GroveLEDBar2|104020006|[Grove LED Bar v2.0](http://wiki.seeedstudio.com/Grove-LED_Bar/)||
-|<img src="https://files.seeedstudio.com/wiki/Grove-16x2_LCD_Series/img/main.jpg" width="100">|GroveLCD1602|104020111,104020112,104020113|[Grove - 16x2 LCD](http://wiki.seeedstudio.com/Grove-16x2_LCD_Series/)|Mbed–¢‘Î‰|
-|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881151_3.jpg" width="100">|Grove4DigitDisplay|104030003|[Grove - 4-Digit Display](http://wiki.seeedstudio.com/Grove-4-Digit_Display/)|Wio Terminal–¢‘Î‰|
-|<img src="https://statics3.seeedstudio.com/seeed/img/2016-09/6hLLXlBnfODAcWlp2wlaep3j.jpg" width="100">|GroveOLEDDisplay096|104030008|[Grove - OLED Display 0.96"](http://wiki.seeedstudio.com/Grove-OLED_Display_0.96inch/)|Mbed–¢‘Î‰|
+|<img src="https://files.seeedstudio.com/wiki/Grove-16x2_LCD_Series/img/main.jpg" width="100">|GroveLCD1602|104020111,104020112,104020113|[Grove - 16x2 LCD](http://wiki.seeedstudio.com/Grove-16x2_LCD_Series/)|Mbedæœªå¯¾å¿œ|
+|<img src="https://statics3.seeedstudio.com/seeed/file/2018-07/bazaar881151_3.jpg" width="100">|Grove4DigitDisplay|104030003|[Grove - 4-Digit Display](http://wiki.seeedstudio.com/Grove-4-Digit_Display/)|Wio Terminalæœªå¯¾å¿œ|
+|<img src="https://statics3.seeedstudio.com/seeed/img/2016-09/6hLLXlBnfODAcWlp2wlaep3j.jpg" width="100">|GroveOLEDDisplay096|104030008|[Grove - OLED Display 0.96"](http://wiki.seeedstudio.com/Grove-OLED_Display_0.96inch/)|Mbedæœªå¯¾å¿œ|
 |<img src="https://statics3.seeedstudio.com/images/product/Grove%20Circular%20LED.jpg" width="100">|GroveCircularLED|104030013|[Grove - Circular LED](http://wiki.seeedstudio.com/Grove-Circular_LED/)||
 |<img src="https://raw.githubusercontent.com/SeeedDocument/Grove-6-Axis_AccelerometerAndGyroscope/master/img/Grove-6-Axis_AccelerometerAndGyroscope_product_view_1200_s.jpg" width="100">|Grove6AxisAccelGyroLSM6DS3|105020012|[Grove - 6-Axis Accelerometer&Gyroscope](http://wiki.seeedstudio.com/Grove-6-Axis_AccelerometerAndGyroscope/)||
 |<img src="https://statics3.seeedstudio.com/seeed/img/2017-02/lJ51OXkwCFgmT6iAjE030rSd.jpg" width="100">|GroveBuzzer|107020000|[Grove - Buzzer](http://wiki.seeedstudio.com/Grove-Buzzer/)||
@@ -61,26 +61,26 @@ Groveƒ‚ƒWƒ…[ƒ‹‚ÌƒNƒ‰ƒX‚ÆAGrove‘Î‰ƒ{[ƒh‚ÌƒNƒ‰ƒX‚ª—pˆÓ‚³‚ê‚Ä‚¨‚èA‚±‚Ì2‚Â‚ÌƒNƒ
 |<img src="https://files.seeedstudio.com/wiki/Grove-CO2-Temperature-Humidity-Sensor-SCD30/img/main.jpg" width="100">|GroveSCD30|101020634|[Grove - CO2 & Temperature & Humidity Sensor for Arduino (SCD30) - 3-in-1](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/)||
 |<img src="https://files.seeedstudio.com/wiki/Grove-Adjustable_PIR_Motion_Sensor/img/main.jpg" width="100">|GrovePIR|101020617|[Grove - Adjustable PIR Motion Sensor](https://wiki.seeedstudio.com/Grove-Adjustable_PIR_Motion_Sensor/)||
 
-### Šg’£Šî”Â
+### æ‹¡å¼µåŸºæ¿
 
 |Pic|Class|SKU|Name|Note|
 |:--|:--|:--|:--|:--|
 |<img src="https://files.seeedstudio.com/wiki/Wio_Extension-RTC/img/pinout.jpg" width="100">|WioExtRTC|103100082|[Wio Extension - RTC](http://wiki.seeedstudio.com/Wio-Extension-RTC/)||
 
-### GroveƒRƒlƒNƒ^•t‚«ƒ‚ƒWƒ…[ƒ‹
+### Groveã‚³ãƒã‚¯ã‚¿ä»˜ããƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 
 |Pic|Class|Name|Note|
 |:--|:--|:--|:--|
-|![1](img/1.png)|OmronBaro2SMPB02E|[â‘Îˆ³ƒZƒ“ƒT•]‰¿ƒ‚ƒWƒ…[ƒ‹iGroveƒRƒlƒNƒ^•tj](https://www.omron.co.jp/ecb/product-detail?partId=45066)||
+|![1](img/1.png)|OmronBaro2SMPB02E|[çµ¶å¯¾åœ§ã‚»ãƒ³ã‚µè©•ä¾¡ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ï¼ˆGroveã‚³ãƒã‚¯ã‚¿ä»˜ï¼‰](https://www.omron.co.jp/ecb/product-detail?partId=45066)||
 
-## ƒTƒ“ƒvƒ‹ƒR[ƒh
+## ã‚µãƒ³ãƒ—ãƒ«ã‚³ãƒ¼ãƒ‰
 
-ŠeGroveƒ‚ƒWƒ…[ƒ‹‚²‚Æ‚ÉAexamples”z‰º‚É‚ ‚è‚Ü‚·B  
-Arduino IDE‚ğg‚Á‚Ä‚¢‚éê‡‚ÍAƒtƒ@ƒCƒ‹ > ƒXƒPƒbƒ`—á > GroveDriverPack ‚ÅŠJ‚­‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+å„Groveãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã”ã¨ã«ã€examplesé…ä¸‹ã«ã‚ã‚Šã¾ã™ã€‚  
+Arduino IDEã‚’ä½¿ã£ã¦ã„ã‚‹å ´åˆã¯ã€ãƒ•ã‚¡ã‚¤ãƒ« > ã‚¹ã‚±ãƒƒãƒä¾‹ > GroveDriverPack ã§é–‹ãã“ã¨ãŒã§ãã¾ã™ã€‚
 
-## ƒRƒ“ƒgƒŠƒrƒ…[ƒ^[
+## ã‚³ãƒ³ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ã‚¿ãƒ¼
 
-‰º‹L‚Ì•ûX‚ÉvŒ£‚¢‚½‚¾‚«‚Ü‚µ‚½B‚Ç‚¤‚à‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·B
+ä¸‹è¨˜ã®æ–¹ã€…ã«è²¢çŒ®ã„ãŸã ãã¾ã—ãŸã€‚ã©ã†ã‚‚ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚
 
-* [uko](https://github.com/ukkz)‚³‚ñ
-* [n0bisuke](https://github.com/n0bisuke)‚³‚ñ
+* [uko](https://github.com/ukkz)ã•ã‚“
+* [n0bisuke](https://github.com/n0bisuke)ã•ã‚“
