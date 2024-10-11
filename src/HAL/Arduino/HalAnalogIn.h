@@ -20,11 +20,19 @@ protected:
 #if defined ARDUINO_ARCH_STM32F4 || defined ARDUINO_ARCH_STM32
 		pinMode(_Pin, INPUT_ANALOG);
 #endif // ARDUINO_ARCH_STM32F4 || ARDUINO_ARCH_STM32
+
+#if defined ARDUINO_ARCH_NRF52
+		analogReadResolution(14);
+#endif // ARDUINO_ARCH_NRF52
 	}
 
 	virtual float ReadImplement()
 	{
+#if defined ARDUINO_ARCH_NRF52
+		return (float)analogRead(_Pin) / 16383 * 0.6f * 6 / 3.3f;
+#else
 		return (float)analogRead(_Pin) / 1023;
+#endif
 	}
 
 };

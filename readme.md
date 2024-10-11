@@ -20,6 +20,8 @@ Groveモジュールのクラスと、Grove対応ボードのクラスが用意�
   * Arduino - SeeedJP ReButton by Seeed K.K.
 * [Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
   * Arduino - Seeed SAMD Boards by Seeed Studio
+* [Wio BG770A](https://seeedjp.github.io/Wiki/Wio_BG770A/home)
+  * Arduino - SeeedJP nRF52 Boards by Seeed K.K.
 
 ### Groveモジュール
 

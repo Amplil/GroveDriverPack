@@ -12,9 +12,9 @@ public:
 	{
 		MODE_INPUT,
 		MODE_OUTPUT,
-#if defined ARDUINO_ARCH_STM32F4 || defined ARDUINO_ARCH_STM32 || defined __MBED__
+#if defined ARDUINO_ARCH_STM32F4 || defined ARDUINO_ARCH_STM32 || defined ARDUINO_ARCH_NRF52 || defined __MBED__
 		MODE_OUTPUT_OPEN_DRAIN,
-#endif // ARDUINO_ARCH_STM32F4 || ARDUINO_ARCH_STM32 || __MBED__
+#endif // ARDUINO_ARCH_STM32F4 || ARDUINO_ARCH_STM32 || ARDUINO_ARCH_NRF52 || __MBED__
 	};
 
 private:

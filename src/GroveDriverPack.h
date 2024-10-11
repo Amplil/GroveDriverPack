@@ -77,4 +77,6 @@
 #include "Board/Seeed_ReButton/GroveBoard.h"
 #elif defined ARDUINO_WIO_TERMINAL
 #include "Board/WIO_TERMINAL/GroveBoard.h"
+#elif defined ARDUINO_WIO_BG770A
+#include "Board/WIO_BG770A/GroveBoard.h"
 #endif
