@@ -1,38 +1,64 @@
-//GROVE_NAME        "Grove - Laser PM2.5 Air Quality Sensor for Arduino - HM3301"
-//SKU               101020613
-//WIKI_URL          http://wiki.seeedstudio.com/Grove-Laser_PM2.5_Sensor-HM3301/
+//GROVE_NAME        "Grove - CAN BUS Module based on GD32E103"
+//SKU               101020782
+//WIKI_URL          https://wiki.seeedstudio.com/Grove-CAN_BUS_Module-GD32/
 
 #pragma once
 
 #include "Abstract/GroveModule2.h"
-#include "../Connector/GroveConnectorI2C.h"
+#include "../Connector/GroveConnectorUART.h"
 
-class GrovePM25HM3301 : public GroveModule2
+struct CANMessage
 {
-private:
-	HalI2CDevice* _Device;
+	uint32_t id;			// CAN ID (11-bit or 29-bit)
+	bool isExtended;		// Extended ID flag
+	bool isRemote;			// Remote transmission request flag
+	uint8_t length;			// Data length (0-8 bytes)
+	uint8_t data[8];		// Data bytes
+};
 
+class GroveCANBUSModule : public GroveModule2
+{
 public:
-	int Concentration_1_Standard;		// [ug/m3]
-	int Concentration_2_5_Standard;		// [ug/m3]
-	int Concentration_10_Standard;		// [ug/m3]
-	int Concentration_1_Atmospheric;	// [ug/m3]
-	int Concentration_2_5_Atmospheric;	// [ug/m3]
-	int Concentration_10_Atmospheric;	// [ug/m3]
-	int ParticleNumber_0_3;				// [#/l]
-	int ParticleNumber_0_5;				// [#/l]
-	int ParticleNumber_1;				// [#/l]
-	int ParticleNumber_2_5;				// [#/l]
-	int ParticleNumber_5;				// [#/l]
-	int ParticleNumber_10;				// [#/l]
-
-public:
-	GrovePM25HM3301(GroveConnectorI2C* connector)
+	enum SPEED
 	{
-		_Device = connector->NewDevice(0x40);	// I2C_ADDRESS
+		SPEED_5KBPS = 1,
+		SPEED_10KBPS = 2,
+		SPEED_20KBPS = 3,
+		SPEED_25KBPS = 4,
+		SPEED_31K25BPS = 5,
+		SPEED_33KBPS = 6,
+		SPEED_40KBPS = 7,
+		SPEED_50KBPS = 8,
+		SPEED_80KBPS = 9,
+		SPEED_83K3BPS = 10,
+		SPEED_95KBPS = 11,
+		SPEED_100KBPS = 12,
+		SPEED_125KBPS = 13,
+		SPEED_200KBPS = 14,
+		SPEED_250KBPS = 15,
+		SPEED_500KBPS = 16,
+		SPEED_666KBPS = 17,
+		SPEED_1000KBPS = 18
+	};
+
+private:
+	HalUART* _UART;
+	void (*_MessageReceivedCallback)(const CANMessage& message);
+
+	bool SendATCommand(const char* command, const char* expectedResponse = "OK", int timeout = 1000);
+	bool ParseCANMessage(const char* response, CANMessage& message);
+
+public:
+	GroveCANBUSModule(GroveConnectorUART* connector)
+	{
+		_UART = &connector->UART;
+		_MessageReceivedCallback = nullptr;
 	}
 
 	bool Init();
-	void Read();
+	bool SetSpeed(SPEED speed);
+	bool SendMessage(const CANMessage& message);
+	void AttachMessageReceived(void (*callback)(const CANMessage& message));
+	void DoWork();
 
 };

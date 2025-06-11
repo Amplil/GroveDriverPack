@@ -1,85 +1,97 @@
-// BOARD Seeed Wio LTE M1/NB1(BG96)
-// GROVE I2C <-> Grove - Laser PM2.5 Air Quality Sensor for Arduino - HM3301 (SKU#101020613)
+// BOARD Seeed Wio BG770A
+// GROVE UART <-> Grove - CAN BUS Module based on GD32E103 (SKU#101020782)
 
 #include <GroveDriverPack.h>
-#include <climits>
 
-#define INTERVAL    (2000)
-
-WioCellular Wio;
+#define INTERVAL    (1000)
 
 GroveBoard Board;
-GrovePM25HM3301 PM(&Board.I2C);
+GroveCANBUSModule CanBus(&Board.UART);
+
+void OnMessageReceived(const CANMessage& message)
+{
+  Serial.print("Received CAN Message - ID: 0x");
+  Serial.print(message.id, HEX);
+  Serial.print(", Extended: ");
+  Serial.print(message.isExtended ? "Yes" : "No");
+  Serial.print(", Remote: ");
+  Serial.print(message.isRemote ? "Yes" : "No");
+  Serial.print(", Length: ");
+  Serial.print(message.length);
+  Serial.print(", Data: ");
+  
+  for (int i = 0; i < message.length; i++)
+  {
+    if (message.data[i] < 0x10) Serial.print("0");
+    Serial.print(message.data[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+}
 
 void setup() {
   delay(200);
-  SerialUSB.begin(115200);
+  Serial.begin(115200);
 
-  Wio.Init();
-  Wio.PowerSupplyGrove(true);
-  delay(1500);
-
-  Board.I2C.Enable();
-  if (!PM.Init())
+  // Initialize UART at 9600 baud (default for Grove CAN BUS Module)
+  Board.UART.Enable(9600, 8, HalUART::PARITY_NONE, 1);
+  
+  if (!CanBus.Init())
   {
-    SerialUSB.println("Sensor not found.");
+    Serial.println("CAN BUS Module not found or initialization failed.");
+    while(1);
   }
 
-  SerialUSB.print("PM1.0_concentration(STD)");
-  SerialUSB.print('\t');
-  SerialUSB.print("PM2.5_concentration(STD)");
-  SerialUSB.print('\t');
-  SerialUSB.print("PM10_concentration(STD)");
-  SerialUSB.print('\t');
-  SerialUSB.print("PM1.0_concentration(ENV)");
-  SerialUSB.print('\t');
-  SerialUSB.print("PM2.5_concentration(ENV)");
-  SerialUSB.print('\t');
-  SerialUSB.print("PM10_concentration(ENV)");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_0.3um");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_0.5um");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_1.0um");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_2.5um");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_5.0um");
-  SerialUSB.print('\t');
-  SerialUSB.print("Number_of_particles_10um");
-  SerialUSB.println();
+  Serial.println("Grove CAN BUS Module initialized successfully.");
+  
+  // Set CAN speed to 250KBPS
+  if (CanBus.SetSpeed(GroveCANBUSModule::SPEED_250KBPS))
+  {
+    Serial.println("CAN speed set to 250KBPS.");
+  }
+  else
+  {
+    Serial.println("Failed to set CAN speed.");
+  }
+  
+  // Attach message received callback
+  CanBus.AttachMessageReceived(OnMessageReceived);
+  
+  Serial.println("Setup completed. Starting CAN communication...");
 }
 
 void loop() {
-  PM.Read();
-  if (PM.Concentration_1_Standard != INT_MAX)
+  // Check for incoming messages
+  CanBus.DoWork();
+  
+  // Send a test message every INTERVAL milliseconds
+  static unsigned long lastSendTime = 0;
+  static uint8_t counter = 0;
+  
+  if (millis() - lastSendTime > INTERVAL)
   {
-    SerialUSB.print(PM.Concentration_1_Standard);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.Concentration_2_5_Standard);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.Concentration_10_Standard);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.Concentration_1_Atmospheric);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.Concentration_2_5_Atmospheric);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.Concentration_10_Atmospheric);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_0_3);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_0_5);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_1);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_2_5);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_5);
-    SerialUSB.print('\t');
-    SerialUSB.print(PM.ParticleNumber_10);
-    SerialUSB.println();
+    CANMessage testMessage;
+    testMessage.id = 0x123;          // CAN ID
+    testMessage.isExtended = false;   // Standard ID
+    testMessage.isRemote = false;     // Data frame
+    testMessage.length = 4;           // 4 bytes of data
+    testMessage.data[0] = 0x01;       // Test data
+    testMessage.data[1] = 0x02;
+    testMessage.data[2] = 0x03;
+    testMessage.data[3] = counter++;  // Incrementing counter
+    
+    if (CanBus.SendMessage(testMessage))
+    {
+      Serial.print("Sent test message #");
+      Serial.println(counter - 1);
+    }
+    else
+    {
+      Serial.println("Failed to send test message.");
+    }
+    
+    lastSendTime = millis();
   }
-
-  delay(INTERVAL);
+  
+  delay(10);
 }

@@ -42,6 +42,7 @@
 #include "Module/Grove6AxisAccelGyroLSM6DS3.h"
 #include "Module/GroveMP3V3.h"
 #include "Module/GrovePM25HM3301.h"
+#include "Module/GroveCANBUSModule.h"
 #include "Module/GroveSCD30.h"
 #include "Module/GrovePIR.h"
 
