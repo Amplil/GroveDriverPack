@@ -116,7 +116,7 @@ bool GroveCANBUSModule::EnterSettingMode()
 	_UART->Write('+');
 	
 	ClearBuffer();
-	HalSystem::Delay(100);
+	HalSystem::DelayMs(100);
 	return true;
 }
 
@@ -127,13 +127,13 @@ bool GroveCANBUSModule::ExitSettingMode()
 
 void GroveCANBUSModule::ClearBuffer()
 {
-	unsigned long startTime = HalSystem::ClockMs();
-	while (HalSystem::ClockMs() - startTime < 50)
+	unsigned long startTime = HalSystem::ClockUs() / 1000;
+	while ((HalSystem::ClockUs() / 1000) - startTime < 50)
 	{
 		while (_UART->ReadAvailable() > 0)
 		{
 			_UART->Read();
-			startTime = HalSystem::ClockMs();
+			startTime = HalSystem::ClockUs() / 1000;
 		}
 	}
 }
@@ -147,11 +147,11 @@ bool GroveCANBUSModule::SendATCommand(const char* command, const char* expectedR
 	}
 	
 	// Wait for response
-	unsigned long startTime = HalSystem::ClockMs();
+	unsigned long startTime = HalSystem::ClockUs() / 1000;
 	char response[64];
 	int responseIndex = 0;
 	
-	while (HalSystem::ClockMs() - startTime < timeout)
+	while ((HalSystem::ClockUs() / 1000) - startTime < timeout)
 	{
 		if (_UART->ReadAvailable() > 0)
 		{
@@ -181,7 +181,7 @@ bool GroveCANBUSModule::SendATCommand(const char* command, const char* expectedR
 			}
 		}
 		
-		HalSystem::Delay(1);
+		HalSystem::DelayMs(1);
 	}
 	
 	return false;
