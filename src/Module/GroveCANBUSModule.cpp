@@ -4,23 +4,8 @@
 
 bool GroveCANBUSModule::Init()
 {
-	// Reset the module to factory defaults
-	if (!SendATCommand("AT+RST"))
-		return false;
-	
-	// Wait for module to restart
-	HalSystem::Delay(2000);
-	
-	// Enter configuration mode
-	if (!SendATCommand("AT+CGAUGE=0"))
-		return false;
-	
-	// Set default speed to 250KBPS
-	if (!SetSpeed(SPEED_250KBPS))
-		return false;
-		
-	// Start CAN communication
-	if (!SendATCommand("AT+CGAUGE=1"))
+	// Set default speed to 500KBPS using AT commands
+	if (!SetSpeed(SPEED_500KBPS))
 		return false;
 	
 	_IsExist = true;
@@ -29,32 +14,85 @@ bool GroveCANBUSModule::Init()
 
 bool GroveCANBUSModule::SetSpeed(SPEED speed)
 {
-	char command[32];
-	sprintf(command, "AT+CANSPEED=%d", (int)speed);
-	return SendATCommand(command);
+	if (!EnterSettingMode())
+		return false;
+	
+	char command[16];
+	if (speed < 10)
+		sprintf(command, "AT+C=0%d\r\n", (int)speed);
+	else
+		sprintf(command, "AT+C=%d\r\n", (int)speed);
+	
+	bool result = SendATCommand(command);
+	ExitSettingMode();
+	return result;
 }
 
 bool GroveCANBUSModule::SendMessage(const CANMessage& message)
 {
-	char command[64];
-	char dataStr[17] = {0}; // 8 bytes = 16 hex chars + null terminator
+	// Format: ID3 ID2 ID1 ID0 EXT RTR DTA0 DTA1 DTA2 DTA3 DTA4 DTA5 DTA6 DTA7
+	uint8_t data[14] = {0};
 	
-	// Convert data to hex string
-	for (int i = 0; i < message.length && i < 8; i++)
+	// Set CAN ID (4 bytes)
+	data[0] = (message.id >> 24) & 0xFF;
+	data[1] = (message.id >> 16) & 0xFF;
+	data[2] = (message.id >> 8) & 0xFF;
+	data[3] = message.id & 0xFF;
+	
+	// Set flags
+	data[4] = message.isExtended ? 1 : 0;  // EXT flag
+	data[5] = message.isRemote ? 1 : 0;    // RTR flag
+	
+	// Set data bytes (8 bytes)
+	for (int i = 0; i < 8; i++)
 	{
-		sprintf(dataStr + i*2, "%02X", message.data[i]);
+		if (i < message.length)
+			data[6 + i] = message.data[i];
+		else
+			data[6 + i] = 0;
 	}
 	
-	// Build AT command for sending CAN message
-	// Format: AT+CANSEND=ID,EXTENDED,REMOTE,LENGTH,DATA
-	sprintf(command, "AT+CANSEND=%08X,%d,%d,%d,%s", 
-			message.id, 
-			message.isExtended ? 1 : 0,
-			message.isRemote ? 1 : 0,
-			message.length,
-			dataStr);
+	// Send binary data
+	for (int i = 0; i < 14; i++)
+	{
+		_UART->Write(data[i]);
+	}
 	
-	return SendATCommand(command);
+	return true;
+}
+
+bool GroveCANBUSModule::ReceiveMessage(CANMessage& message)
+{
+	if (_UART->ReadAvailable() >= 12)  // Need at least 12 bytes for a message
+	{
+		uint8_t data[12];
+		
+		// Read 12 bytes
+		for (int i = 0; i < 12; i++)
+		{
+			data[i] = _UART->Read();
+		}
+		
+		// Parse message
+		message.id = ((uint32_t)data[0] << 24) | 
+		            ((uint32_t)data[1] << 16) | 
+		            ((uint32_t)data[2] << 8) | 
+		            data[3];
+		
+		message.isExtended = (data[4] != 0);
+		message.isRemote = (data[5] != 0);
+		message.length = 8;  // Always 8 bytes in this format
+		
+		// Copy data bytes
+		for (int i = 0; i < 8; i++)
+		{
+			message.data[i] = data[4 + i];  // Data starts at byte 4 in received format
+		}
+		
+		return true;
+	}
+	
+	return false;
 }
 
 void GroveCANBUSModule::AttachMessageReceived(void (*callback)(const CANMessage& message))
@@ -64,39 +102,38 @@ void GroveCANBUSModule::AttachMessageReceived(void (*callback)(const CANMessage&
 
 void GroveCANBUSModule::DoWork()
 {
-	// Check for incoming messages
-	if (_UART->ReadAvailable() > 0)
+	CANMessage message;
+	if (ReceiveMessage(message) && _MessageReceivedCallback)
 	{
-		static char buffer[128];
-		static int bufferIndex = 0;
-		
+		_MessageReceivedCallback(message);
+	}
+}
+
+bool GroveCANBUSModule::EnterSettingMode()
+{
+	_UART->Write('+');
+	_UART->Write('+');
+	_UART->Write('+');
+	
+	ClearBuffer();
+	HalSystem::Delay(100);
+	return true;
+}
+
+bool GroveCANBUSModule::ExitSettingMode()
+{
+	return SendATCommand("AT+Q\r\n");
+}
+
+void GroveCANBUSModule::ClearBuffer()
+{
+	unsigned long startTime = HalSystem::ClockMs();
+	while (HalSystem::ClockMs() - startTime < 50)
+	{
 		while (_UART->ReadAvailable() > 0)
 		{
-			char c = _UART->Read();
-			
-			if (c == '\n' || c == '\r')
-			{
-				if (bufferIndex > 0)
-				{
-					buffer[bufferIndex] = '\0';
-					
-					// Parse CAN message if it's a received message
-					if (strncmp(buffer, "+CANRECV:", 9) == 0)
-					{
-						CANMessage message;
-						if (ParseCANMessage(buffer, message) && _MessageReceivedCallback)
-						{
-							_MessageReceivedCallback(message);
-						}
-					}
-					
-					bufferIndex = 0;
-				}
-			}
-			else if (bufferIndex < sizeof(buffer) - 1)
-			{
-				buffer[bufferIndex++] = c;
-			}
+			_UART->Read();
+			startTime = HalSystem::ClockMs();
 		}
 	}
 }
@@ -108,8 +145,6 @@ bool GroveCANBUSModule::SendATCommand(const char* command, const char* expectedR
 	{
 		_UART->Write(*p);
 	}
-	_UART->Write('\r');
-	_UART->Write('\n');
 	
 	// Wait for response
 	unsigned long startTime = HalSystem::ClockMs();
@@ -128,9 +163,12 @@ bool GroveCANBUSModule::SendATCommand(const char* command, const char* expectedR
 				{
 					response[responseIndex] = '\0';
 					
-					// Check if response matches expected
-					if (strstr(response, expectedResponse) != nullptr)
+					// Check for "OK" response
+					if (responseIndex >= 2 && 
+					    response[responseIndex-2] == 'O' && 
+					    response[responseIndex-1] == 'K')
 					{
+						ClearBuffer();
 						return true;
 					}
 					
@@ -147,66 +185,4 @@ bool GroveCANBUSModule::SendATCommand(const char* command, const char* expectedR
 	}
 	
 	return false;
-}
-
-bool GroveCANBUSModule::ParseCANMessage(const char* response, CANMessage& message)
-{
-	// Parse format: +CANRECV:ID,EXTENDED,REMOTE,LENGTH,DATA
-	if (strncmp(response, "+CANRECV:", 9) != 0)
-		return false;
-	
-	const char* data = response + 9;
-	
-	// Parse ID
-	if (sscanf(data, "%08X", &message.id) != 1)
-		return false;
-	
-	// Find next comma
-	data = strchr(data, ',');
-	if (!data) return false;
-	data++;
-	
-	// Parse extended flag
-	int extended;
-	if (sscanf(data, "%d", &extended) != 1)
-		return false;
-	message.isExtended = (extended != 0);
-	
-	// Find next comma
-	data = strchr(data, ',');
-	if (!data) return false;
-	data++;
-	
-	// Parse remote flag
-	int remote;
-	if (sscanf(data, "%d", &remote) != 1)
-		return false;
-	message.isRemote = (remote != 0);
-	
-	// Find next comma
-	data = strchr(data, ',');
-	if (!data) return false;
-	data++;
-	
-	// Parse length
-	int length;
-	if (sscanf(data, "%d", &length) != 1)
-		return false;
-	message.length = (uint8_t)length;
-	
-	// Find next comma
-	data = strchr(data, ',');
-	if (!data) return false;
-	data++;
-	
-	// Parse data bytes
-	for (int i = 0; i < message.length && i < 8; i++)
-	{
-		unsigned int byte;
-		if (sscanf(data + i*2, "%02X", &byte) != 1)
-			return false;
-		message.data[i] = (uint8_t)byte;
-	}
-	
-	return true;
 }

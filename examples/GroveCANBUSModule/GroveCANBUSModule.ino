@@ -16,11 +16,9 @@ void OnMessageReceived(const CANMessage& message)
   Serial.print(message.isExtended ? "Yes" : "No");
   Serial.print(", Remote: ");
   Serial.print(message.isRemote ? "Yes" : "No");
-  Serial.print(", Length: ");
-  Serial.print(message.length);
   Serial.print(", Data: ");
   
-  for (int i = 0; i < message.length; i++)
+  for (int i = 0; i < 8; i++)  // Always print 8 bytes
   {
     if (message.data[i] < 0x10) Serial.print("0");
     Serial.print(message.data[i], HEX);
@@ -44,10 +42,10 @@ void setup() {
 
   Serial.println("Grove CAN BUS Module initialized successfully.");
   
-  // Set CAN speed to 250KBPS
-  if (CanBus.SetSpeed(GroveCANBUSModule::SPEED_250KBPS))
+  // Set CAN speed to 500KBPS (matching Longan Labs default)
+  if (CanBus.SetSpeed(GroveCANBUSModule::SPEED_500KBPS))
   {
-    Serial.println("CAN speed set to 250KBPS.");
+    Serial.println("CAN speed set to 500KBPS.");
   }
   else
   {
@@ -74,11 +72,15 @@ void loop() {
     testMessage.id = 0x123;          // CAN ID
     testMessage.isExtended = false;   // Standard ID
     testMessage.isRemote = false;     // Data frame
-    testMessage.length = 4;           // 4 bytes of data
+    testMessage.length = 8;           // 8 bytes of data (standard)
     testMessage.data[0] = 0x01;       // Test data
     testMessage.data[1] = 0x02;
     testMessage.data[2] = 0x03;
     testMessage.data[3] = counter++;  // Incrementing counter
+    testMessage.data[4] = 0x05;
+    testMessage.data[5] = 0x06;
+    testMessage.data[6] = 0x07;
+    testMessage.data[7] = 0x08;
     
     if (CanBus.SendMessage(testMessage))
     {

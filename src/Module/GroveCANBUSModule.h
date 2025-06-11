@@ -46,7 +46,9 @@ private:
 	void (*_MessageReceivedCallback)(const CANMessage& message);
 
 	bool SendATCommand(const char* command, const char* expectedResponse = "OK", int timeout = 1000);
-	bool ParseCANMessage(const char* response, CANMessage& message);
+	bool EnterSettingMode();
+	bool ExitSettingMode();
+	void ClearBuffer();
 
 public:
 	GroveCANBUSModule(GroveConnectorUART* connector)
@@ -58,6 +60,7 @@ public:
 	bool Init();
 	bool SetSpeed(SPEED speed);
 	bool SendMessage(const CANMessage& message);
+	bool ReceiveMessage(CANMessage& message);
 	void AttachMessageReceived(void (*callback)(const CANMessage& message));
 	void DoWork();
 
